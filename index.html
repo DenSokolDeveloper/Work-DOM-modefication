@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<style>
+    ul{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    li{
+        margin-left: 30px;
+        list-style: none;
+    }
+    button{
+        border: 2px solid black;
+        color: white;
+        background-color: black;
+        cursor: pointer;
+        width: 20%;
+        height: 100px;
+        margin-bottom: 10px;
+    }
+</style>
+
+
+<ul id="list">
+    <li>Red</li>
+    <li>Green</li>
+    <li>Purple</li>
+    <li>Pink</li>
+    <li>Blue</li>
+    <li>White</li>
+    <li>Lemon</li>
+    <li>Dark</li>
+    <li>Yellow</li>
+</ul>
+
+<div id="demo">
+    <button id="name1" >Выбрать первый элемент</button>
+    <button id="name2" >Выбрать следующий элемент</button>
+    <button id="name3" >Выбрать последний элемент</button>
+    <button id="name4" >Выбрать предыдущий элемент</button>
+    <button id="name5" >Добавить элемент</button>
+    <button id="name6" >Удалить элемент</button>
+    <button id="name7" >Добавить в начало элемент</button>
+</div>
+
+<script>
+    let vecList = document.getElementById('list');
+    let perechenLi= document.getElementsByTagName('li');
+    let n;//индекс
+    let firstElement;
+    let lastEllement;
+    let     current;//индекс текущего
+
+    //первый
+    document.getElementById('name1').onclick = function () {
+        n=0;
+        firstElement= perechenLi[0];
+        console.log(firstElement.innerHTML);
+        current = n;
+        console.log(current);
+    };
+    //выбрать следующий
+    document.getElementById('name2').onclick = function(){
+        n=current;
+        n++;
+        if (perechenLi[n]===undefined){ n=0;}
+        console.log(perechenLi[n].innerHTML);
+        current=n;
+        console.log(current);
+
+    };
+    //последний
+    document.getElementById('name3').onclick = function () {
+        n= perechenLi.length-1;
+        lastEllement = perechenLi[perechenLi.length-1];
+        console.log(lastEllement.innerHTML);
+        current = n;
+        console.log(current);
+    };
+
+    //предыдущий
+    document.getElementById('name4').onclick = function () {
+        n = current;
+        n--;
+        if (perechenLi[n] === undefined) {
+            n= perechenLi.length-1;//-поместить индекс последнего
+        }
+            console.log(perechenLi[n].innerHTML);
+            current = n;
+            console.log(current);
+
+    };
+
+    //добавить элемент
+    document.getElementById('name5').onclick = function () {
+        var liLast = document.createElement('LI');//Добавление в конец
+        liLast.innerHTML = 'New last element';
+        vecList.appendChild(liLast);
+    };
+    //удалить элемент
+    document.getElementById('name6').onclick = function (){
+        var newDlinna=perechenLi.length;
+        var answer= prompt('Какой элемент хотите удалить?');
+        if (answer<=newDlinna){
+
+            var liCHose = vecList.getElementsByTagName('LI')[answer];
+            vecList.removeChild(liCHose);
+
+        }else    {
+            alert('Введите правильный номер');
+        }
+    };
+    //добавить элемент в начало
+    document.getElementById('name7').onclick = function () {
+
+        var liFirst = vecList.getElementsByTagName('LI')[0];//Добавление в начало или любое конкретное место
+        var newListElement = document.createElement('LI');
+        newListElement.innerHTML='New first element';
+        vecList.insertBefore(newListElement,liFirst);
+    };
+
+
+
+
+
+</script>
+</body>
+</html>
